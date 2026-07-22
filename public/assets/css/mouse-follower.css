@@ -1,0 +1,62 @@
+/* ==========================================================================
+   IEC Custom Red Mouse Follower Pointer Styling (Dynamic Cyan Text Color Change Lens)
+   ========================================================================== */
+
+/* Cursor Container */
+#iec-mouse-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 999999;
+}
+
+/* Default Red Pointer Dot */
+.iec-cursor-dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    background-color: #de1717;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.25s cubic-bezier(0.215, 0.61, 0.355, 1), 
+                height 0.25s cubic-bezier(0.215, 0.61, 0.355, 1), 
+                background-color 0.25s ease,
+                border 0.25s ease,
+                box-shadow 0.25s ease;
+    box-shadow: 0 0 12px rgba(222, 23, 23, 0.8);
+    pointer-events: none;
+}
+
+/* Text Hover State: Dynamic Cyan Text Color Change Magnification Lens */
+#iec-mouse-follower.iec-cursor-text-hover .iec-cursor-dot {
+    width: 85px;
+    height: 85px;
+    background-color: transparent;
+    border: 2px solid #de1717;
+    box-shadow: 0 0 22px rgba(222, 23, 23, 0.45);
+    backdrop-filter: invert(1) hue-rotate(180deg) contrast(1.2);
+    -webkit-backdrop-filter: invert(1) hue-rotate(180deg) contrast(1.2);
+}
+
+/* Active Click State */
+#iec-mouse-follower.iec-cursor-active .iec-cursor-dot {
+    transform: translate(-50%, -50%) scale(0.75);
+}
+
+/* Hidden State (When leaving window) */
+#iec-mouse-follower.iec-cursor-hidden .iec-cursor-dot {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+/* Hide on Touch and Small Screen Devices */
+@media (pointer: coarse), (max-width: 768px) {
+    #iec-mouse-follower {
+        display: none !important;
+    }
+}
