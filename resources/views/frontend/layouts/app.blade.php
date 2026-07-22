@@ -44,6 +44,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
     <!-- Nawar Trade design system (60-30-10 palette) -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/nawar-design-system.css') }}">
+    <!-- Custom Red Mouse Follower Pointer CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/mouse-follower.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- This stylesheet dynamically changed from style.less -->
@@ -154,6 +156,11 @@
 
 <body>
 
+    <!-- Custom Red Mouse Follower Pointer -->
+    <div id="iec-mouse-follower" class="iec-cursor-follower iec-cursor-hidden" aria-hidden="true">
+        <div class="iec-cursor-dot"></div>
+    </div>
+
 
     @include('frontend.layouts.header')
     @yield('content')
@@ -186,6 +193,8 @@
     <script src="{{ asset('assets/js/ajaxchimp.min.js') }}"></script>
     <!-- magnific popup js -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <!-- Custom Red Mouse Follower Pointer JS -->
+    <script src="{{ asset('assets/js/mouse-follower.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var popup = document.getElementById('whatsapp-popup');
