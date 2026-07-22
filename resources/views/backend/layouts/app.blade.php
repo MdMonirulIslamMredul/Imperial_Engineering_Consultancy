@@ -52,7 +52,7 @@
 
             <section class="content">
                 @yield('content')
-            </section> <!-- section -->
+            </section>
         </div> <!-- content -->
 
         {{-- @include('backend.includes.footer') --}}

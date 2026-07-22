@@ -1,7 +1,17 @@
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+        --adm-banner-bg: url("{{ asset('setting/banner/ENGINEERING-CONSULTANCY.jpg') }}");
+    }
+
     /* ═══════════════════════════════════════════
    MODERN ADMIN SIDEBAR
 ═══════════════════════════════════════════ */
+
+    .main-sidebar * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
 
     body.hold-transition.admin-modern-layout {
         background: #f8fafc !important;
@@ -19,10 +29,13 @@
         transform: none !important;
         width: 260px !important;
         height: calc(100vh - 65px) !important;
-        background: #0f172a !important;
-        /* Elegant slate-900 */
-        border-right: none !important;
-        box-shadow: 1px 0 10px rgba(0, 0, 0, 0.05) !important;
+        background-color: #272727 !important;
+        background-image: linear-gradient(180deg, rgba(39, 39, 39, 0.81) 0%, rgba(39, 38, 38, 0.80) 100%), var(--adm-banner-bg) !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2) !important;
         overflow-y: auto !important;
         overflow-x: hidden !important;
         z-index: 1040 !important;
@@ -56,7 +69,11 @@
         padding-top: 65px !important;
         /* Space for fixed header */
         min-height: 100vh !important;
-        background: #f8fafc !important;
+        background-color: #f8fafc !important;
+        background-image: linear-gradient(rgba(248, 250, 252, 0.85), rgba(248, 250, 252, 0.85)), var(--adm-banner-bg) !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-attachment: fixed !important;
         transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
@@ -101,12 +118,13 @@
         align-items: center;
         gap: 0.75rem;
         padding: 1.2rem 1.25rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         margin-bottom: 0.5rem;
     }
 
     .adm-sb-logo-title {
-        font-size: 0.9rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 1rem;
         font-weight: 700;
         color: #f8fafc;
         white-space: nowrap;
@@ -115,21 +133,22 @@
     }
 
     .adm-sb-logo-sub {
-        font-size: 0.7rem;
-        color: #94a3b8;
+        font-size: 0.72rem;
+        color: #ff8a80;
         margin-top: 2px;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
+        font-weight: 600;
     }
 
     .adm-sb-section {
-        padding: 1rem 1.25rem 0.5rem;
+        padding: 1.1rem 1.25rem 0.5rem;
         margin: 0;
-        font-size: 0.65rem;
+        font-size: 0.72rem;
         font-weight: 800;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: #64748b;
+        color: #94a3b8;
         user-select: none;
     }
 
@@ -140,39 +159,39 @@
     }
 
     .adm-sb-nav-item {
-        margin-bottom: 2px;
+        margin-bottom: 3px;
     }
 
     .adm-sb-link {
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        padding: 0.6rem 0.85rem;
+        padding: 0.65rem 0.9rem;
         border-radius: 8px;
         color: #cbd5e1 !important;
-        font-size: 0.85rem;
-        font-weight: 500;
+        font-size: 0.92rem;
+        font-weight: 600;
         text-decoration: none !important;
         transition: all 0.2s;
         cursor: pointer;
     }
 
     .adm-sb-link:hover {
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(185, 32, 25, 0.2);
         color: #ffffff !important;
     }
 
     .adm-sb-link.is-active {
-        background: #2563eb !important;
+        background: linear-gradient(135deg, #b92019 0%, #991b1b 100%) !important;
         color: #ffffff !important;
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        box-shadow: 0 4px 14px rgba(185, 32, 25, 0.4);
     }
 
     .adm-sb-link-ico {
-        width: 18px;
-        height: 18px;
+        width: 19px;
+        height: 19px;
         flex-shrink: 0;
-        opacity: 0.7;
+        opacity: 0.85;
         transition: opacity 0.2s;
     }
 
@@ -191,31 +210,31 @@
     .adm-sb-chevron {
         width: 14px;
         height: 14px;
-        color: #64748b;
+        color: #94a3b8;
         flex-shrink: 0;
         transition: transform 0.2s;
     }
 
     .adm-sb-link[aria-expanded="true"] .adm-sb-chevron {
         transform: rotate(90deg);
-        color: #cbd5e1;
+        color: #ff8a80;
     }
 
     .adm-sb-submenu {
         list-style: none;
-        margin: 4px 0 4px 1.2rem;
+        margin: 4px 0 6px 1.2rem;
         padding: 0 0 0 0.8rem;
-        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        border-left: 1px solid rgba(185, 32, 25, 0.35);
     }
 
     .adm-sb-sub-link {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        padding: 0.45rem 0.75rem;
+        gap: 0.55rem;
+        padding: 0.5rem 0.8rem;
         border-radius: 6px;
-        color: #94a3b8 !important;
-        font-size: 0.8rem;
+        color: #cbd5e1 !important;
+        font-size: 0.86rem;
         font-weight: 500;
         text-decoration: none !important;
         transition: all 0.15s;
@@ -223,37 +242,38 @@
 
     .adm-sb-sub-link::before {
         content: '';
-        width: 4px;
-        height: 4px;
+        width: 5px;
+        height: 5px;
         border-radius: 50%;
         background: #64748b;
         flex-shrink: 0;
-        transition: background 0.15s;
+        transition: background 0.15s, transform 0.15s;
     }
 
     .adm-sb-sub-link:hover {
-        background: rgba(255, 255, 255, 0.05);
-        color: #f8fafc !important;
+        background: rgba(185, 32, 25, 0.15);
+        color: #ffffff !important;
     }
 
     .adm-sb-sub-link:hover::before {
-        background: #3b82f6;
+        background: #ff8a80;
     }
 
     .adm-sb-sub-link.is-active-sub {
-        color: #3b82f6 !important;
+        color: #ff8a80 !important;
         font-weight: 600;
     }
 
     .adm-sb-sub-link.is-active-sub::before {
-        background: #3b82f6;
+        background: #b92019;
         transform: scale(1.5);
+        box-shadow: 0 0 8px rgba(185, 32, 25, 0.6);
     }
 
     .adm-sb-divider {
         margin: 0.75rem 1.25rem;
         border: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 </style>
 
