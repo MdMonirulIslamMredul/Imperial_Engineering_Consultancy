@@ -2,6 +2,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 @section('content')
 
+@section('title', __('Homepage'))
+
+<title>{{ app_name() }} | @yield('title')</title>
+
 @php
 $sliders = DB::table('sliders')
 ->where('is_active', 1)
@@ -341,7 +345,7 @@ $sliders = DB::table('sliders')
                         <i class="ri-lightbulb-flash-line"></i>
                     </div>
                     <h4>Concept</h4>
-                    <span class="process-dot"></span>
+                    <!-- <span class="process-dot"></span> -->
                 </div>
             </div>
 
@@ -465,9 +469,9 @@ $sliders = DB::table('sliders')
 </style>
 
 <!-- About Section -->
-<div class="about-section" style="background-color: #f8f9fa; padding: 100px 0; position: relative; overflow: hidden; background-image: url('{{ asset('setting/banner/ENGINEERING-CONSULTANCY.jpg') }}'); background-size: cover; background-position: center; background-attachment: fixed;">
+<div class="about-section" style="background-color: #f8f9fa; padding: 100px 0 80px; position: relative; overflow: hidden; background-image: url('{{ asset('setting/banner/ENGINEERING-CONSULTANCY.jpg') }}'); background-size: cover; background-position: center; background-attachment: fixed;">
     <!-- Overlay gradient for better text readability and floating effect -->
-    <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 100%);"></div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.65) 50%, rgba(255,255,255,0.2) 100%);"></div>
 
     <div class="container" style="position: relative; z-index: 1;">
         <div class="row">
@@ -488,11 +492,9 @@ $sliders = DB::table('sliders')
     </div>
 </div>
 
-
-
 <!-- Core Values Section -->
-<div class="core-values-section" style="padding: 80px 0; background-color: #fafafa; position: relative;">
-    <!-- Optional faint background pattern if needed -->
+<div class="core-values-section" style="padding: 40px 0; background-color: rgba(250, 250, 250, 0.75); position: relative;">
+    <!-- Faint background pattern -->
     <div style="position: absolute; inset: 0; background-image: radial-gradient(#e5e5e5 1px, transparent 1px); background-size: 25px 25px; opacity: 0.4;"></div>
 
     <div class="container" style="position: relative; z-index: 1;">
@@ -517,8 +519,6 @@ $sliders = DB::table('sliders')
                     <h3 class="value-title">Strategy</h3>
                     <p class="value-text">At IEC, we deliver strategic, unbiased guidance backed by deep industry expertise to drive smart, high-impact decisions.</p>
                 </div>
-                <!-- Decorative Red Dot -->
-                <span class="value-dot"></span>
             </div>
 
             <!-- Team Work -->
@@ -537,9 +537,17 @@ $sliders = DB::table('sliders')
 
 <style>
     .value-card {
-        padding: 0 15px;
+        padding: 25px 20px;
         position: relative;
         z-index: 2;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        border-radius: 4px;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .value-card:hover {
+        background-color: #dcdcdc;
     }
 
     .value-icon {
@@ -547,6 +555,11 @@ $sliders = DB::table('sliders')
         color: #9a1616;
         margin-bottom: 15px;
         display: inline-block;
+        transition: transform 0.3s ease;
+    }
+
+    .value-card:hover .value-icon {
+        transform: scale(1.08);
     }
 
     .value-title {
@@ -554,6 +567,11 @@ $sliders = DB::table('sliders')
         font-weight: 800;
         color: #1a1a2e;
         margin-bottom: 15px;
+        transition: color 0.3s ease;
+    }
+
+    .value-card:hover .value-title {
+        color: #ba231b;
     }
 
     .value-text {
@@ -562,6 +580,11 @@ $sliders = DB::table('sliders')
         line-height: 1.7;
         margin: 0 auto;
         max-width: 320px;
+        transition: color 0.3s ease;
+    }
+
+    .value-card:hover .value-text {
+        color: #333;
     }
 
     .value-dot {
@@ -814,26 +837,140 @@ $sliders = DB::table('sliders')
     });
 </script>
 
+<!-- Video Showcase Section -->
+<div class="video-showcase-section" style="position: relative; width: 100%; overflow: hidden; background-color: #000; margin: 10px 0;">
+    <div class="video-container" id="videoParallaxContainer" style="position: relative; width: 100%; height: 90vh; max-height: 90vh; overflow: hidden; background-image: url('{{ asset('setting/about/1731080394.jpg') }}'); background-size: cover; background-position: center; background-attachment: fixed;">
+
+        <video id="iecMainVideo"
+            src="{{ asset('setting/about/Engineering-Tomorrow-Designing-Today-1.mp4') }}"
+            style="width: 100%; height: 100%; object-fit: contain; background-color: #000; display: none; position: relative; z-index: 2;"
+            preload="metadata"
+            playsinline></video>
+
+        <!-- Video Overlay & Play Button -->
+        <div class="video-overlay" id="videoOverlay" style="position: absolute; inset: 0; z-index: 3; background: rgba(0, 0, 0, 0.25); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity 0.3s ease;">
+            <button type="button" class="video-play-trigger" aria-label="Play Video" style="background: #ffffff; border: none; width: 85px; height: 85px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease, box-shadow 0.3s ease; outline: none; cursor: pointer; position: relative;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="#000000" style="margin-left: 4px;">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .video-play-trigger::before {
+        content: '';
+        position: absolute;
+        inset: -10px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        animation: videoPulse 2s infinite;
+    }
+
+    .video-overlay:hover .video-play-trigger {
+        transform: scale(1.1);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    @keyframes videoPulse {
+        0% {
+            transform: scale(0.95);
+            opacity: 0.8;
+        }
+
+        50% {
+            transform: scale(1.15);
+            opacity: 0.2;
+        }
+
+        100% {
+            transform: scale(0.95);
+            opacity: 0.8;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .video-container {
+            height: 480px !important;
+            max-height: 75vh !important;
+            background-attachment: scroll !important;
+        }
+
+        .video-play-trigger {
+            width: 65px !important;
+            height: 65px !important;
+        }
+
+        .video-play-trigger svg {
+            width: 22px !important;
+            height: 22px !important;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var video = document.getElementById('iecMainVideo');
+        var overlay = document.getElementById('videoOverlay');
+
+        if (video && overlay) {
+            overlay.addEventListener('click', function() {
+                if (video.paused) {
+                    video.style.display = 'block';
+                    video.play();
+                    video.controls = true;
+                    overlay.style.opacity = '0';
+                    overlay.style.pointerEvents = 'none';
+                }
+            });
+
+            video.addEventListener('pause', function() {
+                video.controls = false;
+                overlay.style.opacity = '1';
+                overlay.style.pointerEvents = 'auto';
+            });
+
+            video.addEventListener('ended', function() {
+                video.controls = false;
+                video.style.display = 'none';
+                overlay.style.opacity = '1';
+                overlay.style.pointerEvents = 'auto';
+            });
+        }
+    });
+</script>
+
+
 <!-- Clients Section -->
-<div class="clients-section" style="padding: 60px 0; background-color: #ffffff; position: relative;">
+<div class="clients-section" style="padding: 40px 0 0; background-color: #ffffff; position: relative;">
     <div class="container">
-        <div class="row mb-4">
+        <div class="row mb-3">
             <div class="col-12" data-aos="fade-up" data-aos-duration="1000">
-                <h2 style="font-size: 36px; font-weight: 700; color: #b73315; margin-bottom: 20px;">Clients</h2>
+                <h2 style="font-size: 38px; font-weight: 800; color: #ba231b; margin-bottom: 20px; font-family: 'Outfit', sans-serif;">Clients</h2>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
-                <div class="client-slider owl-carousel owl-theme">
-                    @if(isset($brands) && $brands->count() > 0)
-                    @foreach($brands as $brand)
-                    <div class="client-item">
-                        <div class="client-card">
-                            <img src="{{ asset('/setting/brand/' . $brand->logo) }}" alt="{{ $brand->title }}">
+    </div>
+
+    <!-- Horizontal Shaded Strip Container -->
+    <div class="clients-shaded-strip" style="position: relative; background: #eef0f2; padding: 40px 0; border-top: 1px solid #e1e3e7; margin-top: 10px;">
+        <!-- Top Center Triangle Notch -->
+        <div class="clients-notch" style="position: absolute; top: -14px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-bottom: 14px solid #eef0f2; z-index: 5;"></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="client-slider owl-carousel owl-theme">
+                        @if(isset($brands) && $brands->count() > 0)
+                        @foreach($brands as $brand)
+                        <div class="client-item" style="padding: 4px;">
+                            <div class="client-card">
+                                <img src="{{ asset('/setting/brand/' . $brand->logo) }}" alt="{{ $brand->title }}">
+                            </div>
                         </div>
+                        @endforeach
+                        @endif
                     </div>
-                    @endforeach
-                    @endif
                 </div>
             </div>
         </div>
@@ -843,27 +980,30 @@ $sliders = DB::table('sliders')
 <style>
     .client-card {
         background: #ffffff;
-        border: 1px solid #e8e8e8;
-        border-radius: 6px;
-        padding: 20px;
+        border: 1px solid #e1e3e7;
+        border-radius: 8px;
+        padding: 15px 20px;
         text-align: center;
         height: 110px;
         display: flex;
         align-items: center;
         justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         transition: all 0.3s ease;
     }
 
     .client-card:hover {
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-        border-color: #d0d0d0;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        border-color: #cbd5e1;
     }
 
     .client-card img {
-        max-width: 100%;
-        max-height: 70px;
+        max-width: 85%;
+        max-height: 60px;
         width: auto !important;
-        /* Overrides owl carousel 100% width default */
+        height: auto !important;
+        object-fit: contain;
         display: inline-block !important;
     }
 
@@ -877,7 +1017,7 @@ $sliders = DB::table('sliders')
         if ($.fn.owlCarousel) {
             $('.client-slider').owlCarousel({
                 loop: true,
-                margin: 20,
+                margin: 24,
                 nav: false,
                 dots: false,
                 autoplay: true,
@@ -895,7 +1035,10 @@ $sliders = DB::table('sliders')
                         items: 4
                     },
                     992: {
-                        items: 5
+                        items: 4
+                    },
+                    1200: {
+                        items: 4
                     }
                 }
             });
