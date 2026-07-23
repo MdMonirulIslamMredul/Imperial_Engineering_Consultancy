@@ -288,7 +288,13 @@
 
     .uv-view-more {
         text-align: center;
-        margin-top: 40px;
+        margin-top: 55px;
+        padding-top: 15px;
+        clear: both;
+        position: relative;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
     }
 
     /* ── CTA Card Section ── */
@@ -481,7 +487,7 @@
             </div>
 
             <div class="uv-view-more">
-                <a href="{{ url('/all/brand') }}" class="sd-doc-btn" style="background: var(--brand);">
+                <a href="{{ route('clients.index') }}" class="sd-doc-btn" style="background: var(--brand);">
                     View All Clients <i class="ri-arrow-right-line"></i>
                 </a>
             </div>
