@@ -232,18 +232,41 @@
     }
 
     /* ── Clients Slider ── */
-    .uv-slider {
-        max-width: 1200px;
-        margin: 0 auto;
+    /* ── Infinite Brand Marquee Carousel ── */
+    .uv-marquee-wrapper {
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+        padding: 15px 0 25px 0;
+        mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
     }
 
-    .uv-slider .owl-stage-outer {
-        padding: 15px 5px 25px 5px;
+    .uv-marquee-track {
+        display: flex;
+        gap: 25px;
+        width: max-content;
+        animation: uvMarqueeScroll 28s linear infinite;
+        will-change: transform;
     }
 
-    .uv-slider .owl-nav,
-    .uv-slider .owl-dots {
-        display: none !important;
+    .uv-marquee-track:hover {
+        animation-play-state: paused;
+    }
+
+    .uv-marquee-track .uv-card {
+        width: 220px;
+        flex-shrink: 0;
+        margin: 0;
+    }
+
+    @keyframes uvMarqueeScroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
     }
 
     .uv-card {
@@ -475,15 +498,46 @@
                 <p>Trusted partners and industry leaders we have had the privilege to collaborate with</p>
             </div>
 
-            <div class="uv-slider owl-carousel owl-theme">
-                @foreach($brands as $brand)
-                <div class="uv-card">
-                    <img src="{{ asset('/setting/brand/' . $brand->logo) }}" alt="{{ $brand->title ?? 'Client' }}">
-                    @if(!empty($brand->title))
-                    <span>{{ $brand->title }}</span>
+            <div class="uv-marquee-wrapper">
+                <div class="uv-marquee-track">
+                    @foreach($brands as $brand)
+                    <div class="uv-card">
+                        <img src="{{ asset('/setting/brand/' . $brand->logo) }}" alt="{{ $brand->title ?? 'Client' }}">
+                        @if(!empty($brand->title))
+                        <span>{{ $brand->title }}</span>
+                        @endif
+                    </div>
+                    @endforeach
+
+                    {{-- Duplicate loop for seamless infinite marquee animation --}}
+                    @foreach($brands as $brand)
+                    <div class="uv-card">
+                        <img src="{{ asset('/setting/brand/' . $brand->logo) }}" alt="{{ $brand->title ?? 'Client' }}">
+                        @if(!empty($brand->title))
+                        <span>{{ $brand->title }}</span>
+                        @endif
+                    </div>
+                    @endforeach
+
+                    @if($brands->count() < 6)
+                    @foreach($brands as $brand)
+                    <div class="uv-card">
+                        <img src="{{ asset('/setting/brand/' . $brand->logo) }}" alt="{{ $brand->title ?? 'Client' }}">
+                        @if(!empty($brand->title))
+                        <span>{{ $brand->title }}</span>
+                        @endif
+                    </div>
+                    @endforeach
+                    @foreach($brands as $brand)
+                    <div class="uv-card">
+                        <img src="{{ asset('/setting/brand/' . $brand->logo) }}" alt="{{ $brand->title ?? 'Client' }}">
+                        @if(!empty($brand->title))
+                        <span>{{ $brand->title }}</span>
+                        @endif
+                    </div>
+                    @endforeach
                     @endif
                 </div>
-                @endforeach
             </div>
 
             <div class="uv-view-more">
@@ -527,14 +581,15 @@
                     nav: false,
                     dots: false,
                     autoplay: true,
-                    autoplayTimeout: 2500,
-                    autoplayHoverPause: true,
-                    smartSpeed: 800,
+                    autoplayTimeout: 0,
+                    autoplaySpeed: 3000,
+                    slideTransition: 'linear',
+                    autoplayHoverPause: false,
                     responsive: {
-                        0: { items: 1 },
-                        480: { items: 2 },
-                        768: { items: 3 },
-                        992: { items: 4 },
+                        0: { items: 2 },
+                        480: { items: 3 },
+                        768: { items: 4 },
+                        992: { items: 5 },
                         1200: { items: 5 }
                     }
                 });
