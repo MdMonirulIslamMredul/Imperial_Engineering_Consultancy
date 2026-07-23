@@ -1070,17 +1070,45 @@ $sliders = DB::table('sliders')
                     <div class="ps-text-content">
                         <h3>{{ $project->title }}</h3>
                         <div class="ps-separator"></div>
-                        <a href="{{ url('/project/' . $project->id) }}" class="ps-btn"><span>READ MORE</span> <i class="ri-arrow-right-line"></i></a>
+                        <a href="{{ route('project.show', $project->id) }}" class="ps-btn"><span>READ MORE</span> <i class="ri-arrow-right-line"></i></a>
                     </div>
                 </div>
             </div>
             @endforeach
             @endif
         </div>
+
+        <div style="text-align: center; margin-top: 45px;" data-aos="fade-up" data-aos-duration="1000">
+            <a href="{{ route('project.list') }}" class="ps-view-all-btn">
+                <span>SEE ALL OUR PROJECTS</span> <i class="ri-arrow-right-line"></i>
+            </a>
+        </div>
     </div>
 </div>
 
 <style>
+    .ps-view-all-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #b92019;
+        color: #ffffff !important;
+        font-weight: 700;
+        font-size: 15px;
+        padding: 14px 32px;
+        border-radius: 6px;
+        text-decoration: none !important;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(185, 32, 25, 0.25);
+    }
+
+    .ps-view-all-btn:hover {
+        background: #A61B21;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(185, 32, 25, 0.35);
+        color: #ffffff !important;
+    }
+
     .ps-heading {
         text-align: center;
         margin-bottom: 50px;
