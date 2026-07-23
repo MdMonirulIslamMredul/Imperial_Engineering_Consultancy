@@ -1,5 +1,5 @@
 /**
- * Custom Red Mouse Follower Pointer JS with Text Magnifying Lens Effect
+ * Custom Red Mouse Follower Pointer JS
  * Imperial Engineering Consultancy
  */
 
@@ -28,8 +28,11 @@ document.addEventListener('DOMContentLoaded', function () {
         return (1 - amt) * start + amt * end;
     }
 
-    // Text & interactive element selectors for magnifying lens trigger
-    const textSelectors = 'h1, h2, h3, h4, h5, h6, p, span, a, li, label, strong, em, b, i, th, td, blockquote, input, textarea, select, button, .btn, .nav-link, [role="button"], .card, .go-top, .title, .tx-title, .tx-description, .clickable';
+    // Static text selectors for magnifying lens trigger
+    const textSelectors = 'h1, h2, h3, h4, h5, h6, p, blockquote, th, td, label';
+
+    // Interactive element selectors (Buttons, links, inputs) - Magnification is DISABLED here
+    const interactiveSelectors = 'a, button, .btn, [role="button"], input, textarea, select, .nav-link, .clickable, .go-top';
 
     // Header & Footer Exclusion Selectors (Disable magnification in Header & Footer)
     const headerFooterSelectors = 'header, footer, .header, .footer, .navbar-area, .modern-footer, .site-header, .site-footer, #header, #footer, .footer-area, .copy-right-area';
@@ -69,29 +72,46 @@ document.addEventListener('DOMContentLoaded', function () {
         container.classList.remove('iec-cursor-active');
     });
 
-    // Hover Delegation for Text Elements & Magnifying Lens (Excluding Header & Footer)
+    // Hover Delegation for Text Elements & Interactive Buttons/Links
     document.body.addEventListener('mouseover', function (e) {
-        if (e.target) {
-            // Disable magnification feature in header and footer
-            if (e.target.closest(headerFooterSelectors)) {
-                container.classList.remove('iec-cursor-text-hover');
-                return;
-            }
+        if (!e.target) return;
 
-            if (e.target.closest(textSelectors)) {
-                container.classList.add('iec-cursor-text-hover');
-            }
+        const isInteractive = e.target.closest(interactiveSelectors);
+        const isHeaderFooter = e.target.closest(headerFooterSelectors);
+
+        // If hovering over buttons or links, disable magnification completely so hover color changes are visible
+        if (isInteractive) {
+            container.classList.remove('iec-cursor-text-hover');
+            container.classList.add('iec-cursor-link-hover');
+            return;
+        } else {
+            container.classList.remove('iec-cursor-link-hover');
+        }
+
+        // Disable magnification in header and footer
+        if (isHeaderFooter) {
+            container.classList.remove('iec-cursor-text-hover');
+            return;
+        }
+
+        // Apply magnifying lens ONLY to non-interactive static body text
+        if (e.target.closest(textSelectors)) {
+            container.classList.add('iec-cursor-text-hover');
+        } else {
+            container.classList.remove('iec-cursor-text-hover');
         }
     });
 
     document.body.addEventListener('mouseout', function (e) {
-        if (e.target) {
-            if (e.target.closest(headerFooterSelectors) || e.target.closest(textSelectors)) {
-                const related = e.relatedTarget;
-                if (!related || related.closest(headerFooterSelectors) || !related.closest(textSelectors)) {
-                    container.classList.remove('iec-cursor-text-hover');
-                }
-            }
+        if (!e.target) return;
+        const related = e.relatedTarget;
+
+        if (!related || related.closest(interactiveSelectors) || !related.closest(textSelectors) || related.closest(headerFooterSelectors)) {
+            container.classList.remove('iec-cursor-text-hover');
+        }
+
+        if (!related || !related.closest(interactiveSelectors)) {
+            container.classList.remove('iec-cursor-link-hover');
         }
     });
 

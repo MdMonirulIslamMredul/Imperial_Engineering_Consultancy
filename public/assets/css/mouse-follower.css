@@ -1,5 +1,5 @@
 /* ==========================================================================
-   IEC Custom Red Mouse Follower Pointer Styling (Dynamic Cyan Text Color Change Lens)
+   IEC Custom Red Mouse Follower Pointer Styling
    ========================================================================== */
 
 /* Cursor Container */
@@ -32,7 +32,7 @@
     pointer-events: none;
 }
 
-/* Text Hover State: Dynamic Cyan Text Color Change Magnification Lens */
+/* Static Text Hover State: Dynamic Cyan Text Color Change Magnification Lens */
 #iec-mouse-follower.iec-cursor-text-hover .iec-cursor-dot {
     width: 85px;
     height: 85px;
@@ -41,6 +41,17 @@
     box-shadow: 0 0 22px rgba(222, 23, 23, 0.45);
     backdrop-filter: invert(1) hue-rotate(180deg) contrast(1.2);
     -webkit-backdrop-filter: invert(1) hue-rotate(180deg) contrast(1.2);
+}
+
+/* Interactive Link & Button Hover State: Small non-intrusive red dot so button hover color is fully visible */
+#iec-mouse-follower.iec-cursor-link-hover .iec-cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #de1717;
+    border: none;
+    box-shadow: 0 0 8px rgba(222, 23, 23, 0.6);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 /* Active Click State */
