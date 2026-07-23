@@ -960,16 +960,44 @@ $sliders = DB::table('sliders')
         <div class="container">
             <div class="row">
                 <div class="col-12" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
-                    <div class="client-slider owl-carousel owl-theme">
-                        @if(isset($brands) && $brands->count() > 0)
-                        @foreach($brands as $brand)
-                        <div class="client-item" style="padding: 4px;">
-                            <div class="client-card">
-                                <img src="{{ asset('/setting/brand/' . $brand->logo) }}" alt="{{ $brand->title }}">
+                    <div class="client-marquee-wrapper">
+                        <div class="client-marquee-track">
+                            @if(isset($brands) && $brands->count() > 0)
+                            @foreach($brands as $brand)
+                            <div class="client-item">
+                                <div class="client-card">
+                                    <img src="{{ asset('/setting/brand/' . $brand->logo) }}" alt="{{ $brand->title }}">
+                                </div>
                             </div>
+                            @endforeach
+
+                            {{-- Duplicate loop for seamless infinite marquee animation --}}
+                            @foreach($brands as $brand)
+                            <div class="client-item">
+                                <div class="client-card">
+                                    <img src="{{ asset('/setting/brand/' . $brand->logo) }}" alt="{{ $brand->title }}">
+                                </div>
+                            </div>
+                            @endforeach
+
+                            @if($brands->count() < 6)
+                            @foreach($brands as $brand)
+                            <div class="client-item">
+                                <div class="client-card">
+                                    <img src="{{ asset('/setting/brand/' . $brand->logo) }}" alt="{{ $brand->title }}">
+                                </div>
+                            </div>
+                            @endforeach
+                            @foreach($brands as $brand)
+                            <div class="client-item">
+                                <div class="client-card">
+                                    <img src="{{ asset('/setting/brand/' . $brand->logo) }}" alt="{{ $brand->title }}">
+                                </div>
+                            </div>
+                            @endforeach
+                            @endif
+                            @endif
                         </div>
-                        @endforeach
-                        @endif
                     </div>
                 </div>
             </div>
@@ -978,6 +1006,43 @@ $sliders = DB::table('sliders')
 </div>
 
 <style>
+    /* ── Clients Infinite Marquee Carousel ── */
+    .client-marquee-wrapper {
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+        padding: 5px 0;
+        mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+    }
+
+    .client-marquee-track {
+        display: flex;
+        gap: 24px;
+        width: max-content;
+        animation: clientMarqueeScroll 28s linear infinite;
+        will-change: transform;
+    }
+
+    .client-marquee-track:hover {
+        animation-play-state: paused;
+    }
+
+    .client-marquee-track .client-item {
+        width: 230px;
+        flex-shrink: 0;
+        padding: 4px;
+    }
+
+    @keyframes clientMarqueeScroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
     .client-card {
         background: #ffffff;
         border: 1px solid #e1e3e7;
@@ -1006,45 +1071,7 @@ $sliders = DB::table('sliders')
         object-fit: contain;
         display: inline-block !important;
     }
-
-    .client-slider .owl-nav,
-    .client-slider .owl-dots {
-        display: none !important;
-    }
 </style>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        if ($.fn.owlCarousel) {
-            $('.client-slider').owlCarousel({
-                loop: true,
-                margin: 24,
-                nav: false,
-                dots: false,
-                autoplay: true,
-                autoplayTimeout: 2500,
-                autoplayHoverPause: true,
-                smartSpeed: 800,
-                responsive: {
-                    0: {
-                        items: 2
-                    },
-                    576: {
-                        items: 3
-                    },
-                    768: {
-                        items: 4
-                    },
-                    992: {
-                        items: 4
-                    },
-                    1200: {
-                        items: 4
-                    }
-                }
-            });
-        }
-    });
-</script>
 <!-- Projects Section -->
 <div class="projects-section" style="background-color: #eff3ea; padding: 90px 0;">
     <div class="container">
