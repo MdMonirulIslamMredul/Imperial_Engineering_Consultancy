@@ -34,12 +34,20 @@ class AboutController extends Controller
         return view('backend.content.mission.index', compact('items'));
     }
 
-        public function tech_web_team_index()
+    public function tech_web_team_index()
     {
         $about = About::latest()->first();
         $team=Committee::all();
         $banner= null;
         return view('frontend.team.index', compact('about','team','banner'));
+    }
+
+    public function tech_web_clients_index()
+    {
+        $about = About::latest()->first();
+        $brands = Brand::all();
+        $banner = null;
+        return view('frontend.clients.index', compact('about', 'brands', 'banner'));
     }
 
     public function store(Request $request)
