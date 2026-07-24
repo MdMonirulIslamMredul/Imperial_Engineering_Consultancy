@@ -777,6 +777,8 @@ class SettingController extends Controller
     $service->image3 = $newImageName3 ?? null;
     $service->banner = $banner ?? null;
     $service->title = $request->title ?? null;
+    $service->short_title = $request->short_title ?? null;
+    $service->rating = $request->rating ?? null;
     $service->details1 = $request->details1 ?? null;
     $service->details2 = $request->details2 ?? null;
     $service->details3 = $request->details3 ?? null;
@@ -824,6 +826,8 @@ class SettingController extends Controller
     $service->image3 = $newImageName3 ?? null;
     $service->banner = $banner ?? null;
     $service->title = $request->title ?? null;
+    $service->short_title = $request->short_title ?? null;
+    $service->rating = $request->rating ?? null;
     $service->details1 = $request->details1 ?? null;
     $service->details2 = $request->details2 ?? null;
     $service->details3 = $request->details3 ?? null;

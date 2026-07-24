@@ -22,6 +22,14 @@
                             <input type="text" name="title" class="form-control" placeholder="Title">
                         </div>
                         <div class="form-group">
+                            <label>Short Title</label>
+                            <input type="text" name="short_title" class="form-control" placeholder="Short Title">
+                        </div>
+                        <div class="form-group">
+                            <label>Rating</label>
+                            <input type="text" name="rating" class="form-control" placeholder="e.g. 4.9">
+                        </div>
+                        <div class="form-group">
                             <label>Image-1</label>
                             <input type="file" name="image1" class="form-control">
                         </div>
